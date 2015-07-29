@@ -39,18 +39,22 @@ precision (MAP) of any recommendation result
 2. Run your algorithm on the training data.
 
 3. Put your results into a data frame with the following format:
-+ the first column consists of all the user IDs and is named
+
+  + the first column consists of all the user IDs and is named
 USER_ID_hash; 
-+ the other columns are the IDs of the recommended coupons,
+
+  + the other columns are the IDs of the recommended coupons,
 in descending order of confidence.
 
 4. Load the purchase records from the validation week.
+
 ```{r, eval=FALSE}
 load("coupon_purchased_test.RData")
 ```
 
 5. Calculate the mean average precision (MAP) of your
 recommendations.
+
 ```{r, eval=FALSE}
 source("map.R")
 MAP(predict, coupon_purchased_test)   # 'predict' refers to the data frame created in step 3

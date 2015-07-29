@@ -1,0 +1,65 @@
+
+***
+
+This folder is created to allow us to evaluate and
+compare different recommendation models (say, arising
+from varying the values of certain parameters). It 
+contains three sets of training-validation data (all
+extracted from the original training data), and an R
+script for evaluation.
+
+***
+
+### What files are there?
+
+* __split1/__: a folder containing a training-validation set,
+coming from the parts of the original training data in the
+period from 2011-07-01 to 2012-06-16 and the period from
+2012-06-17 to 2012-06-23
+
+* __split2/__: a folder containing a training-validation set,
+coming from the parts of the original training data
+in the period from 2011-07-01 to 2012-06-09 and the period from
+2012-06-10 to 2012-06-16
+
+* __split3/__: a folder containing a training-validation set,
+coming from the parts of the original training data
+in the period from 2011-07-01 to 2012-06-02 and the period from
+2012-06-03 to 2012-06-09
+
+* __map.R__: an R script that calculates the mean average
+precision (MAP) of any recommendation result
+
+***
+
+### How to use the files?
+
+1. Pick a set of training-validation data (see above).
+
+2. Run your algorithm on the training data.
+
+3. Put your results into a data frame with the following format:
+
+  + the first column consists of all the user IDs and is named
+USER_ID_hash; 
+
+  + the other columns are the IDs of the recommended coupons,
+in descending order of confidence.
+
+4. Load the purchase records from the validation week.
+
+```{r, eval=FALSE}
+load("coupon_purchased_test.RData")
+```
+
+5. Calculate the mean average precision (MAP) of your
+recommendations.
+
+```{r, eval=FALSE}
+source("map.R")
+MAP(predict, coupon_purchased_test)   # 'predict' refers to the data frame created in step 3
+```
+
+***
+
+
